@@ -30,12 +30,12 @@ func (s *APIService) GetRouter() http.Handler {
 }
 
 func NewAPIService(cropUseCase app.IDownloadAndCropImageUseCase, release bool) *APIService {
-	apiService := APIService{}
-	apiService.router = gin.Default()
-
 	if release {
 		gin.SetMode(gin.ReleaseMode)
 	}
+
+	apiService := APIService{}
+	apiService.router = gin.Default()
 
 	cropHandler := NewCropHandler(cropUseCase)
 
