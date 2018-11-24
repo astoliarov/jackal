@@ -15,7 +15,7 @@ Start a container:
 ```
 docker run --name awesome-jackal -p 0.0.0.0:3000:3000 jackal
 ```
-Then you can perform requests:
+Now you can perform requests:
 ```
 wget 'http://localhost:3000/api/v1/crop?height=300&width=400&url=https%3A%2F%2Fsource.unsplash.com%2Frandom%2F800x600'
 ```
