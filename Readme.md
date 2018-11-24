@@ -1,5 +1,6 @@
 # Jackal
 [![Build Status](https://travis-ci.com/astoliarov/jackal.svg?branch=master)](https://travis-ci.com/astoliarov/jackal)
+
 Image resizing proxy. Simple opensourced replacement for [CloudFront + AWS image resizing solution](https://aws.amazon.com/blogs/networking-and-content-delivery/resizing-images-with-amazon-cloudfront-lambdaedge-aws-cdn-blog/).
 
 ### Features
