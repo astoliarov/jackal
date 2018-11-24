@@ -3,9 +3,9 @@ package api
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"jackal/pkg/interfaces"
 	"log"
 	"net/http"
-	"jackal/pkg/interfaces"
 )
 
 type ValidateErrs map[string]string

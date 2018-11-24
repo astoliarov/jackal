@@ -1,17 +1,17 @@
 package api
 
 import (
-	"github.com/stretchr/testify/suite"
+	"encoding/json"
+	"fmt"
 	"github.com/golang/mock/gomock"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/suite"
+	"jackal/pkg/interfaces"
 	"jackal/tests/mocks"
 	"net/http"
 	"net/http/httptest"
-	"fmt"
-	"github.com/stretchr/testify/assert"
-	"testing"
 	"net/url"
-	"encoding/json"
-	"jackal/pkg/interfaces"
+	"testing"
 )
 
 func performRequest(r http.Handler, method, path string) *httptest.ResponseRecorder {
@@ -39,7 +39,6 @@ func (suite *CropHandlerTestSuite) SetupTest() {
 
 	suite.router = apiService.GetRouter()
 }
-
 
 func (suite *CropHandlerTestSuite) Test_Handle_AllParametersPassed_CorrectStatus() {
 	width := 400
@@ -86,7 +85,6 @@ func (suite *CropHandlerTestSuite) Test_Handle_PassedUrl_UrlParsedCorrectly() {
 	urlString := "http://foobarbuz.tech/ololo?bing=test"
 	encodedUrl := url.QueryEscape(urlString)
 
-
 	path := fmt.Sprintf("/api/v1/crop?width=%d&height=%d&url=%s", width, height, encodedUrl)
 	suite.useCaseMock.EXPECT().Execute(urlString, gomock.Any(), height, gomock.Any()).Return([]byte{}, "jpeg", nil)
 
@@ -100,7 +98,6 @@ func (suite *CropHandlerTestSuite) Test_Handle_CropTypeNotPassed_CropTypeDefault
 	height := 400
 	urlString := "http://foobarbuz.tech/ololo?bing=test"
 	encodedUrl := url.QueryEscape(urlString)
-
 
 	path := fmt.Sprintf("/api/v1/crop?width=%d&height=%d&url=%s", width, height, encodedUrl)
 	suite.useCaseMock.EXPECT().Execute(urlString, gomock.Any(), gomock.Any(), interfaces.CropTypeDefault).Return([]byte{}, "jpeg", nil)
@@ -116,7 +113,6 @@ func (suite *CropHandlerTestSuite) Test_Handle_CropTypePassedRation_CropTypeRati
 	urlString := "http://foobarbuz.tech/ololo?bing=test"
 	encodedUrl := url.QueryEscape(urlString)
 
-
 	path := fmt.Sprintf("/api/v1/crop?type=ratio&width=%d&height=%d&url=%s", width, height, encodedUrl)
 	suite.useCaseMock.EXPECT().Execute(urlString, gomock.Any(), gomock.Any(), interfaces.CropTypeRatio).Return([]byte{}, "jpeg", nil)
 
@@ -130,7 +126,6 @@ func (suite *CropHandlerTestSuite) Test_Handle_CropTypePassedNotRatio_CropTypeDe
 	height := 400
 	urlString := "http://foobarbuz.tech/ololo?bing=test"
 	encodedUrl := url.QueryEscape(urlString)
-
 
 	path := fmt.Sprintf("/api/v1/crop?type=pration&width=%d&height=%d&url=%s", width, height, encodedUrl)
 	suite.useCaseMock.EXPECT().Execute(urlString, gomock.Any(), gomock.Any(), interfaces.CropTypeDefault).Return([]byte{}, "jpeg", nil)
@@ -195,7 +190,6 @@ func (suite *CropHandlerTestSuite) Test_Handle_UrlNotPassed_UrlErrorMessageCorre
 	assert.Nil(suite.T(), err)
 	assert.Equal(suite.T(), responseJson["errors"]["url"], "field is required")
 }
-
 
 func TestCropHandler(t *testing.T) {
 	testSuite := CropHandlerTestSuite{}

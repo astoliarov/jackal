@@ -1,14 +1,14 @@
 package app
 
 import (
-	"testing"
-	"github.com/stretchr/testify/suite"
-	"net/http"
-	"net"
-	"fmt"
 	"context"
-	"time"
+	"fmt"
+	"github.com/stretchr/testify/suite"
+	"net"
+	"net/http"
 	"net/url"
+	"testing"
+	"time"
 )
 
 func helloWorldHandler(w http.ResponseWriter, r *http.Request) {
@@ -21,12 +21,11 @@ func timeOutHandler(w http.ResponseWriter, r *http.Request) {
 	time.Sleep(2 * time.Second)
 }
 
-
 type FetchServiceTestSuite struct {
 	suite.Suite
 
-	server *http.Server
-	listener net.Listener
+	server       *http.Server
+	listener     net.Listener
 	fetchService *FetchService
 }
 
@@ -41,7 +40,6 @@ func (suite *FetchServiceTestSuite) SetupTest() {
 	suite.listener = suite.startListenOnRandomPort()
 }
 
-
 func (suite *FetchServiceTestSuite) startListenOnRandomPort() net.Listener {
 	listener, err := net.Listen("tcp", "127.0.0.1:0")
 	if err != nil {
@@ -50,9 +48,9 @@ func (suite *FetchServiceTestSuite) startListenOnRandomPort() net.Listener {
 	return listener
 }
 
-func (suite *FetchServiceTestSuite) runServer(ctx context.Context){
+func (suite *FetchServiceTestSuite) runServer(ctx context.Context) {
 	go func() {
-		<- ctx.Done()
+		<-ctx.Done()
 		suite.server.Shutdown(ctx)
 	}()
 
@@ -96,4 +94,3 @@ func TestFetchService(t *testing.T) {
 	testSuite := FetchServiceTestSuite{}
 	suite.Run(t, &testSuite)
 }
-

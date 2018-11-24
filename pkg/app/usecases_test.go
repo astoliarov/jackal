@@ -1,19 +1,19 @@
 package app
 
 import (
-	"testing"
-	"github.com/stretchr/testify/suite"
-	"github.com/golang/mock/gomock"
-	"jackal/tests/mocks"
 	"errors"
+	"github.com/golang/mock/gomock"
+	"github.com/stretchr/testify/suite"
 	"jackal/pkg/interfaces"
+	"jackal/tests/mocks"
+	"testing"
 )
 
 type DownloadAndCropImageUseCaseTestSuite struct {
 	suite.Suite
 
-	controller *gomock.Controller
-	fetchServiceMock *mocks.MockIFetchService
+	controller            *gomock.Controller
+	fetchServiceMock      *mocks.MockIFetchService
 	processingServiceMock *mocks.MockIImageProcessingService
 
 	useCase *DownloadAndCropImageUseCase
@@ -133,7 +133,6 @@ func (suite *DownloadAndCropImageUseCaseTestSuite) Test_Execute_CropCenteredRetu
 	suite.Assert().Equal(dummyErr, err)
 
 }
-
 
 func TestDownloadAndCropImageUseCase(t *testing.T) {
 	testSuite := DownloadAndCropImageUseCaseTestSuite{}

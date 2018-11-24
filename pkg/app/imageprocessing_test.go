@@ -1,16 +1,16 @@
 package app
 
 import (
-	"testing"
+	"bytes"
+	"encoding/base64"
 	"github.com/stretchr/testify/suite"
 	"image"
 	"image/color"
-	"bytes"
-	"image/jpeg"
-	"encoding/base64"
-	"image/png"
 	"image/gif"
+	"image/jpeg"
+	"image/png"
 	"jackal/pkg/interfaces"
+	"testing"
 )
 
 const croppedImg = `/9j/2wCEAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDIBCQkJDAsMGA0NGDIhHCEyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMv/AABEIAJYAlgMBIgACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/APn+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKMUDg04ldgGDuz19qASG0UUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAf/9k=`
@@ -40,7 +40,7 @@ func (suite *ImageProcessingServiceTestSuite) Test_CropCentered_CorrectImagePass
 	buffer := new(bytes.Buffer)
 	jpeg.Encode(buffer, img, nil)
 
-	data, _, _ :=suite.service.CropCentered(buffer.Bytes(), resultWidth, resultHeight, interfaces.CropTypeDefault)
+	data, _, _ := suite.service.CropCentered(buffer.Bytes(), resultWidth, resultHeight, interfaces.CropTypeDefault)
 
 	encoded := base64.StdEncoding.EncodeToString(data)
 
@@ -58,7 +58,7 @@ func (suite *ImageProcessingServiceTestSuite) Test_CropCentered_SizePassed_Resul
 	buffer := new(bytes.Buffer)
 	jpeg.Encode(buffer, img, nil)
 
-	data, _, _ :=suite.service.CropCentered(buffer.Bytes(), resultWidth, resultHeight, interfaces.CropTypeDefault)
+	data, _, _ := suite.service.CropCentered(buffer.Bytes(), resultWidth, resultHeight, interfaces.CropTypeDefault)
 
 	resizedBuffer := bytes.NewBuffer(data)
 
@@ -79,7 +79,7 @@ func (suite *ImageProcessingServiceTestSuite) Test_CropCentered_SizePassedButBig
 	buffer := new(bytes.Buffer)
 	jpeg.Encode(buffer, img, nil)
 
-	data, _, _ :=suite.service.CropCentered(buffer.Bytes(), resultWidth, resultHeight, interfaces.CropTypeDefault)
+	data, _, _ := suite.service.CropCentered(buffer.Bytes(), resultWidth, resultHeight, interfaces.CropTypeDefault)
 
 	resizedBuffer := bytes.NewBuffer(data)
 
@@ -100,7 +100,7 @@ func (suite *ImageProcessingServiceTestSuite) Test_CropCentered_TypeRatio_SizeCh
 	buffer := new(bytes.Buffer)
 	jpeg.Encode(buffer, img, nil)
 
-	data, _, _ :=suite.service.CropCentered(buffer.Bytes(), resultWidth, resultHeight, interfaces.CropTypeRatio)
+	data, _, _ := suite.service.CropCentered(buffer.Bytes(), resultWidth, resultHeight, interfaces.CropTypeRatio)
 
 	resizedBuffer := bytes.NewBuffer(data)
 
@@ -121,7 +121,7 @@ func (suite *ImageProcessingServiceTestSuite) Test_CropCentered_JPEGPassed_JPEGI
 	buffer := new(bytes.Buffer)
 	jpeg.Encode(buffer, img, nil)
 
-	_, imageType, _ :=suite.service.CropCentered(buffer.Bytes(), resultWidth, resultHeight, interfaces.CropTypeDefault)
+	_, imageType, _ := suite.service.CropCentered(buffer.Bytes(), resultWidth, resultHeight, interfaces.CropTypeDefault)
 
 	suite.Assert().Equal("jpeg", imageType)
 }
@@ -137,7 +137,7 @@ func (suite *ImageProcessingServiceTestSuite) Test_CropCentered_PNGPassed_PNGIma
 	buffer := new(bytes.Buffer)
 	png.Encode(buffer, img)
 
-	_, imageType, _ :=suite.service.CropCentered(buffer.Bytes(), resultWidth, resultHeight, interfaces.CropTypeDefault)
+	_, imageType, _ := suite.service.CropCentered(buffer.Bytes(), resultWidth, resultHeight, interfaces.CropTypeDefault)
 
 	suite.Assert().Equal("png", imageType)
 }
@@ -153,7 +153,7 @@ func (suite *ImageProcessingServiceTestSuite) Test_CropCentered_GIFPassed_GIFIma
 	buffer := new(bytes.Buffer)
 	gif.Encode(buffer, img, nil)
 
-	_, imageType, _ :=suite.service.CropCentered(buffer.Bytes(), resultWidth, resultHeight, interfaces.CropTypeDefault)
+	_, imageType, _ := suite.service.CropCentered(buffer.Bytes(), resultWidth, resultHeight, interfaces.CropTypeDefault)
 
 	suite.Assert().Equal("gif", imageType)
 }

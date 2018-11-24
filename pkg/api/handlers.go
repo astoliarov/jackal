@@ -2,9 +2,9 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
+	"jackal/pkg/interfaces"
 	"net/http"
 	"strconv"
-	"jackal/pkg/interfaces"
 )
 
 type CropRequest struct {
