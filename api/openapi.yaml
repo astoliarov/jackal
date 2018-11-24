@@ -1,0 +1,72 @@
+openapi: "3.0.0"
+info:
+  title: Jackal API
+  version: 1.0.0
+paths:
+  /api/v1/crop:
+    get:
+      summary: Fetch image and try to crop it to specified size
+      parameters:
+      - name: url
+        in: query
+        description: url for image to be cropped
+        required: true
+        schema:
+          type: string
+      - name: width
+        in: query
+        description: width of cropped image
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: height
+        in: query
+        description: height of cropped image
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: type
+        in: query
+        description: Type of crop. Allowed choices default and ratio
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with cropped image
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/gif:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CropErrors"
+
+components:
+  schemas:
+    CropErrors:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            url:
+              type: string
+            width:
+              type: string
+            height:
+              type: string
