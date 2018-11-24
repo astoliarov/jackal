@@ -1,8 +1,10 @@
 package app
 
+import "jackal/pkg/interfaces"
+
 type App struct {
-	fetchService           IFetchService
-	imageProcessingService IImageProcessingService
+	fetchService           interfaces.IFetchService
+	imageProcessingService interfaces.IImageProcessingService
 
 	downloadAndCropUseCase *DownloadAndCropImageUseCase
 

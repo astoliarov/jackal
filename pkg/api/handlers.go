@@ -2,20 +2,20 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	"jackal/pkg/app"
 	"net/http"
 	"strconv"
+	"jackal/pkg/interfaces"
 )
 
 type CropRequest struct {
 	Url    string
 	Height int
 	Width  int
-	Type   app.CropType
+	Type   interfaces.CropType
 }
 
 type CropHandler struct {
-	useCase app.IDownloadAndCropImageUseCase
+	useCase interfaces.IDownloadAndCropImageUseCase
 }
 
 func (h *CropHandler) fillAndValidate(c *gin.Context, req *CropRequest) ValidateErrs {
@@ -56,9 +56,9 @@ func (h *CropHandler) fillAndValidate(c *gin.Context, req *CropRequest) Validate
 
 	cropType := c.Query("type")
 	if cropType == "ratio" {
-		req.Type = app.CropTypeRatio
+		req.Type = interfaces.CropTypeRatio
 	} else {
-		req.Type = app.CropTypeDefault
+		req.Type = interfaces.CropTypeDefault
 	}
 
 	return validateErrs
@@ -97,7 +97,7 @@ func (h *CropHandler) HandleGetCrop(c *gin.Context) {
 	c.Data(http.StatusOK, contentType, croppedImage)
 }
 
-func NewCropHandler(cropUseCase app.IDownloadAndCropImageUseCase) *CropHandler {
+func NewCropHandler(cropUseCase interfaces.IDownloadAndCropImageUseCase) *CropHandler {
 	service := CropHandler{}
 	service.useCase = cropUseCase
 	return &service

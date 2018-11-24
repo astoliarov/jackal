@@ -1,11 +1,13 @@
 package app
 
+import "jackal/pkg/interfaces"
+
 type DownloadAndCropImageUseCase struct {
-	fetchService      IFetchService
-	processingService IImageProcessingService
+	fetchService      interfaces.IFetchService
+	processingService interfaces.IImageProcessingService
 }
 
-func (u *DownloadAndCropImageUseCase) Execute(imageUrl string, width int, height int, cropType CropType) ([]byte, string, error) {
+func (u *DownloadAndCropImageUseCase) Execute(imageUrl string, width int, height int, cropType interfaces.CropType) ([]byte, string, error) {
 
 	content, err := u.fetchService.GetBodyFromUrl(imageUrl)
 	if err != nil {
@@ -20,6 +22,6 @@ func (u *DownloadAndCropImageUseCase) Execute(imageUrl string, width int, height
 	return croppedContent, imageType, nil
 }
 
-func NewDownloadAndCropImageUseCase(imageProcessingService IImageProcessingService, fetchService IFetchService) *DownloadAndCropImageUseCase {
+func NewDownloadAndCropImageUseCase(imageProcessingService interfaces.IImageProcessingService, fetchService interfaces.IFetchService) *DownloadAndCropImageUseCase {
 	return &DownloadAndCropImageUseCase{fetchService: fetchService, processingService: imageProcessingService}
 }

@@ -3,9 +3,9 @@ package api
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"jackal/pkg/app"
 	"log"
 	"net/http"
+	"jackal/pkg/interfaces"
 )
 
 type ValidateErrs map[string]string
@@ -29,7 +29,7 @@ func (s *APIService) GetRouter() http.Handler {
 	return s.router
 }
 
-func NewAPIService(cropUseCase app.IDownloadAndCropImageUseCase, release bool) *APIService {
+func NewAPIService(cropUseCase interfaces.IDownloadAndCropImageUseCase, release bool) *APIService {
 	if release {
 		gin.SetMode(gin.ReleaseMode)
 	}

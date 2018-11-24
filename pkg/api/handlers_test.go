@@ -11,7 +11,7 @@ import (
 	"testing"
 	"net/url"
 	"encoding/json"
-	"jackal/pkg/app"
+	"jackal/pkg/interfaces"
 )
 
 func performRequest(r http.Handler, method, path string) *httptest.ResponseRecorder {
@@ -103,7 +103,7 @@ func (suite *CropHandlerTestSuite) Test_Handle_CropTypeNotPassed_CropTypeDefault
 
 
 	path := fmt.Sprintf("/api/v1/crop?width=%d&height=%d&url=%s", width, height, encodedUrl)
-	suite.useCaseMock.EXPECT().Execute(urlString, gomock.Any(), gomock.Any(), app.CropTypeDefault).Return([]byte{}, "jpeg", nil)
+	suite.useCaseMock.EXPECT().Execute(urlString, gomock.Any(), gomock.Any(), interfaces.CropTypeDefault).Return([]byte{}, "jpeg", nil)
 
 	_ = performRequest(suite.router, "GET", path)
 
@@ -118,7 +118,7 @@ func (suite *CropHandlerTestSuite) Test_Handle_CropTypePassedRation_CropTypeRati
 
 
 	path := fmt.Sprintf("/api/v1/crop?type=ratio&width=%d&height=%d&url=%s", width, height, encodedUrl)
-	suite.useCaseMock.EXPECT().Execute(urlString, gomock.Any(), gomock.Any(), app.CropTypeRatio).Return([]byte{}, "jpeg", nil)
+	suite.useCaseMock.EXPECT().Execute(urlString, gomock.Any(), gomock.Any(), interfaces.CropTypeRatio).Return([]byte{}, "jpeg", nil)
 
 	_ = performRequest(suite.router, "GET", path)
 
@@ -133,7 +133,7 @@ func (suite *CropHandlerTestSuite) Test_Handle_CropTypePassedNotRatio_CropTypeDe
 
 
 	path := fmt.Sprintf("/api/v1/crop?type=pration&width=%d&height=%d&url=%s", width, height, encodedUrl)
-	suite.useCaseMock.EXPECT().Execute(urlString, gomock.Any(), gomock.Any(), app.CropTypeDefault).Return([]byte{}, "jpeg", nil)
+	suite.useCaseMock.EXPECT().Execute(urlString, gomock.Any(), gomock.Any(), interfaces.CropTypeDefault).Return([]byte{}, "jpeg", nil)
 
 	_ = performRequest(suite.router, "GET", path)
 

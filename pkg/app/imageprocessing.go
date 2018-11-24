@@ -8,16 +8,12 @@ import (
 	"image/gif"
 	"image/jpeg"
 	"image/png"
+	"jackal/pkg/interfaces"
 )
-
-type CropType int
-
-const CropTypeDefault CropType = 1
-const CropTypeRatio CropType = 2
 
 type ImageProcessingService struct{}
 
-func (service *ImageProcessingService) CropCentered(content []byte, width int, height int, cropType CropType) ([]byte, string, error) {
+func (service *ImageProcessingService) CropCentered(content []byte, width int, height int, cropType interfaces.CropType) ([]byte, string, error) {
 	reader := bytes.NewReader(content)
 
 	img, imageType, err := image.Decode(reader)
@@ -31,7 +27,7 @@ func (service *ImageProcessingService) CropCentered(content []byte, width int, h
 		Mode:   cutter.Centered,
 	}
 
-	if cropType == CropTypeRatio {
+	if cropType == interfaces.CropTypeRatio {
 		config.Options = cutter.Ratio
 	}
 
