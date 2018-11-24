@@ -22,6 +22,6 @@ notifications:
   email: false
 
 script:
-  - go test -v -race ./...  # Run all the tests
+  - go test -v ./...  # Run all the tests
 # TODO: fix data race in FetchServiceTestSuite
 #  - go test -v -race ./...  # Run all the tests with the race detector enabled

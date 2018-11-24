@@ -1,6 +1,9 @@
 package main
 
-import ()
+import (
+	"jackal/pkg/app"
+)
 
 func main() {
+	app.NewApp()
 }

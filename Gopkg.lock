@@ -167,6 +167,7 @@
     "github.com/heetch/confita",
     "github.com/heetch/confita/backend/env",
     "github.com/oliamb/cutter",
+    "github.com/stretchr/testify/assert",
     "github.com/stretchr/testify/suite",
   ]
   solver-name = "gps-cdcl"
