@@ -1,7 +1,7 @@
 package main
 
 import (
-	"jackal/pkg/app"
+	"github.com/astoliarov/jackal/pkg/app"
 )
 
 func main() {

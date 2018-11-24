@@ -9,7 +9,7 @@ import (
 	"image/gif"
 	"image/jpeg"
 	"image/png"
-	"jackal/pkg/interfaces"
+	"github.com/astoliarov/jackal/pkg/interfaces"
 	"testing"
 )
 

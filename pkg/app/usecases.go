@@ -1,6 +1,6 @@
 package app
 
-import "jackal/pkg/interfaces"
+import "github.com/astoliarov/jackal/pkg/interfaces"
 
 type DownloadAndCropImageUseCase struct {
 	fetchService      interfaces.IFetchService

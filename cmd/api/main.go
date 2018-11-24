@@ -1,8 +1,8 @@
 package main
 
 import (
-	"jackal/pkg/api"
-	"jackal/pkg/app"
+	"github.com/astoliarov/jackal/pkg/api"
+	"github.com/astoliarov/jackal/pkg/app"
 	"log"
 )
 

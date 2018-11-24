@@ -3,7 +3,7 @@ package api
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"jackal/pkg/interfaces"
+	"github.com/astoliarov/jackal/pkg/interfaces"
 	"log"
 	"net/http"
 )

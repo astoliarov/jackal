@@ -2,7 +2,7 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	"jackal/pkg/interfaces"
+	"github.com/astoliarov/jackal/pkg/interfaces"
 	"net/http"
 	"strconv"
 )

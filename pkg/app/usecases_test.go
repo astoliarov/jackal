@@ -4,8 +4,8 @@ import (
 	"errors"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/suite"
-	"jackal/pkg/interfaces"
-	"jackal/tests/mocks"
+	"github.com/astoliarov/jackal/pkg/interfaces"
+	"github.com/astoliarov/jackal/tests/mocks"
 	"testing"
 )
 
